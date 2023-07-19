@@ -27,6 +27,8 @@ class Appeal(models.Model):
 
     title = models.CharField(verbose_name='Тема', max_length=128)
 
+    auditorium = models.CharField(verbose_name='Аудитория', max_length=4)
+
     owner = models.ForeignKey(USER, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     group = models.CharField(verbose_name='Группа', max_length=2, choices=GroupTypes.choices, default=GroupTypes.IT)

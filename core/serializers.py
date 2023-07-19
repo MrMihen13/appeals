@@ -8,7 +8,7 @@ class CreateAppealSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Appeal
-        fields = ('title', 'group', 'priority', 'body')
+        fields = ('title', 'auditorium', 'group', 'priority', 'body')
 
 
 class AppealSerializer(serializers.ModelSerializer):
@@ -16,4 +16,4 @@ class AppealSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Appeal
-        fields = ('id', 'title', 'status', 'group', 'priority', 'body')
+        fields = ('id', 'title', 'auditorium', 'status', 'group', 'priority', 'body')
