@@ -1,0 +1,10 @@
+from django.contrib import admin
+
+from core.models import Appeal
+
+
+@admin.register(Appeal)
+class RoomModels(admin.ModelAdmin):
+    list_display = ('id', 'title', 'status', 'group', 'priority')
+    search_fields = ('title',)
+    list_filter = ('status', 'group', 'priority')
