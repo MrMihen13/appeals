@@ -4,7 +4,7 @@ from core.models import Appeal
 
 
 class CreateAppealSerializer(serializers.ModelSerializer):
-    body = serializers.CharField(source='markdown_body', write_only=True)
+    body = serializers.CharField(source='markdown_body', write_only=True, label='Текст Обращения')
 
     class Meta:
         model = Appeal
@@ -12,7 +12,7 @@ class CreateAppealSerializer(serializers.ModelSerializer):
 
 
 class AppealSerializer(serializers.ModelSerializer):
-    body = serializers.CharField(source='html_body', read_only=True)
+    body = serializers.CharField(source='html_body', read_only=True, label='Текст Обращения')
 
     class Meta:
         model = Appeal

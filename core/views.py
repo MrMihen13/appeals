@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, pagination
+from rest_framework.filters import SearchFilter
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -18,8 +19,9 @@ class ListAppealsAPIView(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated, IsOwner)
     serializer_class = AppealSerializer
     queryset = Appeal.objects.all()
-    filter_backends = (DjangoFilterBackend, )
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = AppealFilter
+    search_fields = ['title', 'auditorium']
     pagination_class = pagination.PageNumberPagination
 
     def get_queryset(self):
