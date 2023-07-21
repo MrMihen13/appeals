@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 
 from markdown import markdown
 
-
 USER = get_user_model()
 
 
@@ -39,6 +38,8 @@ class Appeal(models.Model):
 
     markdown_body = models.TextField()
     html_body = models.TextField(editable=False)
+
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     image = ...
 
