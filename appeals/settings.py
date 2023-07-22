@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-m2d_3q34dx525qjx4dpc$
 
 DEBUG = os.environ.get('DEBUG', False) in ('True', 'true', '1', 1)
 
-DOCKER_RUN = os.environ.get('DOCKER_RUN', True)
+DOCKER_RUN = os.environ.get('DOCKER_RUN', False) in ('True', 'true', '1', 1)
 
 ALLOWED_HOSTS = []
 
