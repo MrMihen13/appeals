@@ -43,11 +43,9 @@ class Appeal(models.Model):
 
     image = ...
 
-    def save(
-            self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.body = markdown(self.markdown_body)
-        super().save(self, force_insert, force_update, using)
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.html_body = markdown(self.markdown_body)
+        super().save(self)
 
     def __str__(self):
         return self.title

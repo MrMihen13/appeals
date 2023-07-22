@@ -8,7 +8,8 @@ class CreateAppealSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Appeal
-        fields = ('title', 'auditorium', 'group', 'priority', 'body')
+        fields = ('title', 'auditorium', 'owner', 'group', 'priority', 'body')
+        extra_kwargs = {'owner': {'write_only': True}}
 
 
 class AppealSerializer(serializers.ModelSerializer):

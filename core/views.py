@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, pagination
+from rest_framework import generics, permissions, pagination, response, status
 from rest_framework.filters import SearchFilter
 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -14,6 +14,15 @@ class CreateAppealAPIView(generics.CreateAPIView):
     serializer_class = CreateAppealSerializer
     queryset = Appeal.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        data['owner'] = self.request.user.id
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 
 class ListAppealsAPIView(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated, IsOwner)
@@ -25,7 +34,7 @@ class ListAppealsAPIView(generics.ListAPIView):
     pagination_class = pagination.PageNumberPagination
 
     def get_queryset(self):
-        return self.queryset.filter(owner=self.request.user).order_by('created_at').all()
+        return self.queryset.filter(user=self.request.user).order_by('created_at').all()
 
 
 class RetrieveUpdateDeleteAppealAPIVew(generics.RetrieveUpdateDestroyAPIView):
