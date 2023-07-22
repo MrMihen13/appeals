@@ -12,6 +12,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-m2d_3q34dx525qjx4dpc$
 
 DEBUG = os.environ.get('DEBUG', False) in ('True', 'true', '1', 1)
 
+DOCKER_RUN = os.environ.get('DOCKER_RUN', True)
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -67,23 +69,24 @@ WSGI_APPLICATION = 'appeals.wsgi.application'
 
 # Database
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DOCKER_RUN:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("POSTGRES_DB", ""),
+            "USER": os.environ.get("POSTGRES_USER", ""),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD", ""),
+            "HOST": os.environ.get("POSTGRES_HOST", ""),
+            "PORT": os.environ.get("POSTGRES_PORT", "")
+        }
     }
-}
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ.get("POSTGRES_DB", ""),
-#         "USER": os.environ.get("POSTGRES_USER", ""),
-#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", ""),
-#         "HOST": os.environ.get("POSTGRES_HOST", ""),
-#         "PORT": os.environ.get("POSTGRES_PORT", "")
-#     }
-# }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 

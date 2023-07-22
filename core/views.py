@@ -30,11 +30,8 @@ class ListAppealsAPIView(generics.ListAPIView):
     queryset = Appeal.objects.all()
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = AppealFilter
-    search_fields = ['title', 'auditorium']
+    search_fields = ['title', 'auditorium', 'body']
     pagination_class = pagination.PageNumberPagination
-
-    def get_queryset(self):
-        return self.queryset.filter(user=self.request.user).order_by('created_at').all()
 
 
 class RetrieveUpdateDeleteAppealAPIVew(generics.RetrieveUpdateDestroyAPIView):

@@ -41,8 +41,6 @@ class Appeal(models.Model):
 
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
-    image = ...
-
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.html_body = markdown(self.markdown_body)
         super().save(self)
