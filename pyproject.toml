@@ -17,7 +17,7 @@ drf-yasg = "^1.21.7"
 djangorestframework-simplejwt = "^5.2.2"
 markdown = "^3.4.3"
 django-cors-headers = "^4.2.0"
-psycopg2 = "^2.9.6"
+psycopg2-binary = "^2.9.9"
 
 
 [build-system]
